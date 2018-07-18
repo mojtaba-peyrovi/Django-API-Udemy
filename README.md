@@ -48,3 +48,40 @@ for mking this requirements file we can do this:
 0.0.0.0 means any ip.
 so it all worked and we are ready for the next part.
 ------------------------------------------
+## part 9:
+in this part we learn Viewsets.
+Viewsets use common api object actions like:  
+List: for getting the list of objects.
+Create: for creating an object.
+Retrieve: for getting a specific object.
+Update: for updating an object.
+Partial Update: for updating a part of an object.
+Destroy: for deleting an object.
+Viewsets take care of typical logic for us:
+- perfect for standard database operations.
+- fastest way to create database interface.
+when we may better use Viewsets?
+   - for creating a crud interface.
+   - for making a quick and simple api 
+   - when we dont need customization on the logic. 
+  - when the api works with standard data structure.
+
+----
+now we make a basic Hello viewsets app.  
+first we need to import it to views.py:     from rest_framework import viewsets
+- then we can make the class HelloViewSet() and inherit it from viewsets.ViewSet
+then we will make the functions for each action (list, create, etc.)
+viewset class has its own router from rest_framework. but the first method viewsapi doesnt have that. 
+- in order to use this functionality we need to import the following classes to url.py:
+from django.conf.urls import include
+from rest_framework.routers import DefaultRouter
+and then we instantiate a new DefaultRouter 
+and register it.. 
+router = DefaultRouter()
+router.register('hello-viewset', views.HelloViewSet, base_name='hello-viewset')
+- then we include this:  url(r'', include(router.urls))  to the url patterns
+now the api page is ready to test and the list function works. (http://127.0.0.1:8080/api/hello-viewset/)
+
+----
+we need a serializer also for this method and we can use the same one we made for the prevoious method.
+
