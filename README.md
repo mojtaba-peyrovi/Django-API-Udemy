@@ -25,7 +25,7 @@ and then ls shows all our project files. if we say ls -a it shows all files incl
 virtual env we made) so all the packages we install, would be only installed for this project.
 - in order to turn it off, we say deactivate. then we get out of the current virtual env.
 - if we need to get back to the vartual env, we say : workon <virtualenv_name>
-sometimes workon doesnt work. we need to run this before it:
+sometimes workon doesnt work. we need to run thiscd .. before it:
 source /usr/local/bin/virtualenvwrapper.sh
 
 ------------------------------
@@ -298,6 +298,18 @@ in order to have search functionality we can add from rest_framework import filt
 then we add these 2 lines at the very end of UserProfileViewSet
 filter_backends = (filters.SearchFilter,)
     search_fields = ('name','email',)
+----
+
+## part 10: Create login api
+first in view.py we import these:
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.authtoken.views import ObtainAuthToken
+- then we need to define a class called LoginViewSet to view.py that checks the email and generates auth token. 
+- then we should add a router for this class.  (urls.py)
+router.register('login', views.LoginViewSet, base_name='login')
+---
+using the api view we can now see on the website that login api has been made and it successfully generates token. 
+---
 
 
 
